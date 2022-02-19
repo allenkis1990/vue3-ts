@@ -1,34 +1,39 @@
-
 let api = {
-  getCodeFreeCreationGoToUrl:'/trainingCamp/getCodeFreeCreationGoToUrl'
+  getCodeFreeCreationGoToUrl: '/trainingCamp/getCodeFreeCreationGoToUrl'
 }
-import {postWeb} from "@src/assets/js/http";
+import {postWeb} from "@src/assets/js/http.js";
 
 /**
  * user模块
  */
+interface HomeState {
+  nickName: string
+}
+
+const state: HomeState = {
+  nickName: 'allen'
+}
+
 export default {
-    namespaced: true,
-    state: {
-      nickName:'allen'
+  namespaced: true,
+  state,
+  getters: {},
+  mutations: {
+    changeName(state: HomeState, payload: string) {
+      state.nickName = payload
     },
-    getters: {
-
-    },
-    mutations: {
-
-    },
-    actions: {
-      // getCodeFreeCreationGoToUrlActions({commit,dispatch}){
-      getCodeFreeCreationGoToUrlActions(){
-        return new Promise((resolve,reject)=>{
-          postWeb(api.getCodeFreeCreationGoToUrl).then((res)=>{
-            resolve(res)
-          },(err)=>{
-            reject(err)
-          })
+  },
+  actions: {
+    // getCodeFreeCreationGoToUrlActions({commit,dispatch}){
+    getCodeFreeCreationGoToUrlActions() {
+      return new Promise((resolve, reject) => {
+        postWeb(api.getCodeFreeCreationGoToUrl).then((res) => {
+          resolve(res)
+        }, (err) => {
+          reject(err)
         })
-      }
+      })
     }
+  }
 }
   

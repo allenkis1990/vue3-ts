@@ -1,4 +1,3 @@
-
 const path = require('path');
 let argv = require('yargs').argv
 
@@ -7,33 +6,43 @@ function resolve(dir) {
 }
 
 const webpack = require('webpack');
-
+const AutoImport = require('unplugin-auto-import/dist/webpack.js')
+const Components = require('unplugin-vue-components/dist/webpack.js')
+// const elementPlugin = require('unplugin-element-plus/dist/webpack.js')
+const {ElementPlusResolver} = require('unplugin-vue-components/dist/resolvers.js')
 module.exports = {
-  lintOnSave:'warning',
+  lintOnSave: 'warning',
   //里面是真正的webpack配置
   configureWebpack: {
-    resolveLoader:{
-      mainFields:['main'],
-      modules: [path.resolve(__dirname,"loaders")]
+    resolveLoader: {
+      mainFields: ['main'],
+      modules: [path.resolve(__dirname, "loaders")]
     },
-    module:{
-      rules:[
+    module: {
+      rules: [
         {
-          test:/\.(md)$/,
-          use:{
-            loader:'strLoader'
+          test: /\.(md)$/,
+          use: {
+            loader: 'strLoader'
           }
         }
       ]
     },
-    plugins:[
+    plugins: [
       new webpack.DefinePlugin({
-        isDev:true
+        isDev: true
+      }),
+      // elementPlugin({})
+      AutoImport({
+        resolvers: [ElementPlusResolver()],
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()],
       })
     ]
   },
   chainWebpack: (config) => {
-    if(argv.design){
+    if (argv.design) {
       config.entry('app').clear().add('./design/main.js')
       config.devServer.set('port', '8088');
     }

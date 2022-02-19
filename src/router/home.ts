@@ -1,7 +1,6 @@
 /**
  * Created by Allen Liu on 2020/4/11.
  */
-
 const HomeIndex = () =>
     import(/* webpackChunkName: "home" */ "@src/views/home/home.vue");
 const HomePage2 = () =>

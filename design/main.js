@@ -1,6 +1,11 @@
-import Vue from 'vue';
+import {createApp} from 'vue'
 import App from './App.vue'
 import VueMapper from './vueMapper.js'
+
+// import ElementPlus from 'element-plus'
+// import 'element-plus/dist/index.css'
+// import 'element-plus/es/components/button/style/css'
+// import 'element-plus/es/components/tree/style/css'
 let getUrlParam = (key) => {
   let reg = new RegExp('[?|&]' + key + '=([^&]+)')
   let match = location.search.match(reg)
@@ -8,13 +13,10 @@ let getUrlParam = (key) => {
 }
 let page = getUrlParam('page')
 let router = VueMapper[page] || App
-
-import '@/assets/theme-orange/index.css';
-import ElementUI from 'element-ui';
-Vue.use(ElementUI);
-
+let app = createApp(router)
+// app.use(ElementPlus)
+app.mount('#app')
 
 
-var vm = new Vue({
-  render: h => h(router),
-}).$mount('#app')
+
+
