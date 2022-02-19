@@ -1,0 +1,45 @@
+{
+  "name": "vue3-ts",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "design": "node tasks/vueMapper.js && node tasks/vueMapperTree.js && npm run serve -- --design",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "axios": "^0.26.0",
+    "cookie": "^0.4.1",
+    "core-js": "^3.6.5",
+    "crypto-js": "^3.1.9-1",
+    "element-plus": "^2.0.2",
+    "md5": "^2.2.1",
+    "vue": "^3.0.0",
+    "vue-router": "^4.0.0-0",
+    "vuex": "^4.0.0-0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^5.0.1",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-typescript": "^5.0.1",
+    "@vue/cli-plugin-vuex": "~4.5.0",
+    "@vue/cli-service": "^5.0.1",
+    "@vue/compiler-sfc": "^3.0.0",
+    "postcss": "^8.4.6",
+    "postcss-cssnext": "^3.1.0",
+    "postcss-extend": "^1.0.5",
+    "postcss-import": "^14.0.2",
+    "postcss-mixins": "^6.2.1",
+    "postcss-nested": "^4.1.2",
+    "postcss-pxtorem": "^6.0.0",
+    "postcss-simple-vars": "^5.0.2",
+    "sass": "^1.26.5",
+    "sass-loader": "^8.0.2",
+    "typescript": "~4.1.5",
+    "unplugin-auto-import": "^0.6.0",
+    "unplugin-element-plus": "^0.3.1",
+    "unplugin-vue-components": "^0.17.18",
+    "yargs": "^16.2.0"
+  }
+}
