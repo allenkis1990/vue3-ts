@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "axios": "^0.26.0",
+    "caniuse-lite": "^1.0.30001464",
     "cookie": "^0.4.1",
     "core-js": "^3.6.5",
     "crypto-js": "^3.1.9-1",
@@ -22,6 +23,7 @@
     "vuex-composition-helpers": "^2.0.1"
   },
   "devDependencies": {
+    "@types/node": "^18.15.0",
     "@vue/cli-plugin-babel": "^5.0.1",
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-typescript": "^5.0.1",
@@ -42,7 +44,7 @@
     "unplugin-auto-import": "^0.6.0",
     "unplugin-element-plus": "^0.3.1",
     "unplugin-vue-components": "^0.17.18",
-    "yargs": "^16.2.0",
-    "webpack": "^5.76.1"
+    "webpack": "^5.76.1",
+    "yargs": "^16.2.0"
   }
 }
