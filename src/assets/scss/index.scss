@@ -1,0 +1,41 @@
+*{padding: 0;margin: 0;box-sizing: border-box}
+li{list-style: none}
+html,body{
+    height: 100%;
+    overflow: hidden;
+}
+body{
+    font-size: 14px;
+}
+#app{height: 100%;overflow: scroll;}
+/*定义滚动条宽高及背景，宽高分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/*定义滚动条的轨道颜色、内阴影及圆角*/
+::-webkit-scrollbar-track {
+    display: none;
+}
+
+/*定义滑块颜色、内阴影及圆角*/
+::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: rgba(144, 147, 153, .3);
+    &:hover {
+        background-color: rgba(144, 147, 153, .5);
+    }
+}
+
+/*定义两端按钮的样式*/
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+/*定义右下角汇合处的样式*/
+::-webkit-scrollbar-corner {
+    display: none;
+}
+@import "~@src/assets/scss/mod1/mod1.scss";
+@import "~@src/assets/scss/mod2/mod2.scss";
