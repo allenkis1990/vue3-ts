@@ -11,3 +11,4 @@ interface Window {
   MozMutationObserver:any
 }
 // declare var $:(selector:string) =>any
+declare var process:any

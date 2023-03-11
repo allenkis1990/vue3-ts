@@ -52,7 +52,7 @@ export default defineComponent({
     console.log(1);
     this.getCodeFreeCreationGoToUrl()
     setTimeout(() => {
-      this.$store.state.home.nickName = 'tom'
+      (this as any).$store.state.home.nickName = 'tom'
     }, 3000)
 //    setTimeout(()=>{
 //      this.changeName('TOM')
