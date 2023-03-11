@@ -8,7 +8,7 @@
 </template>
 
 <style lang="postcss">
-@import "~@src/assets/pcss/index.pcss";
+@import "~@src/assets/scss/index.scss";
 </style>
 
 <style>

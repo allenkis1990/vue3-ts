@@ -1,7 +1,8 @@
 import {createApp} from 'vue'
 import App from './App.vue'
 import VueMapper from './vueMapper.js'
-
+import setRem from '@src/assets/js/rem'
+setRem()
 // import ElementPlus from 'element-plus'
 // import 'element-plus/dist/index.css'
 // import 'element-plus/es/components/button/style/css'

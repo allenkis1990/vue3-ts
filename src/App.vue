@@ -2,6 +2,6 @@
   <router-view></router-view>
 </template>
 
-<style lang="postcss">
-@import "~@src/assets/pcss/index.pcss";
+<style lang="scss">
+@import "~@src/assets/scss/index.scss";
 </style>

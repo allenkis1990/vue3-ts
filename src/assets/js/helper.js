@@ -565,18 +565,11 @@ function isObj(obj){
     }
 }
 
-function windowOpen(url,type = '_blank'){
-  let popup = window.open('about:blank',type)
-  popup.document.write('<h2>加载中</h2>')
-  popup.location =url
-}
-
 export default {
     mediadevice,
     pdfHelper,
     browserTester,
     cookieUtils,
     isObj,
-    deepCopy,
-    windowOpen
+    deepCopy
 }

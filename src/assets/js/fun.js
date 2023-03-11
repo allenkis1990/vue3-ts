@@ -115,8 +115,8 @@ function fmtDateTime(dt, fmt) {
     }
   }
 
-  if ((datetime instanceof Date) && !isNaN(datetime.valueOf())) {
-    return datetime.format(fmt || 'yyyy-MM-dd hh:mm:ss');
+  if (datetime instanceof Date && !isNaN(datetime.valueOf())) {
+    return datetime.format(fmt || "yyyy-MM-dd hh:mm:ss");
   } else {
     return "";
   }
@@ -139,11 +139,11 @@ function throttle(fn, delay, isImmediate, isDebounce) {
     diff, //时间差
     context = this, //上下文
     args,
-    exec = function () {
+    exec = function() {
       last_exec = curr;
       fn.bind(context, ...args)();
     };
-  return function () {
+  return function() {
     curr = +new Date();
     context = this;
     args = arguments;
@@ -163,7 +163,7 @@ function throttle(fn, delay, isImmediate, isDebounce) {
       }
     }
     last_call = curr;
-  }
+  };
 }
 
 /**
@@ -197,7 +197,7 @@ function copyDeepObject(obj) {
     }
   } else if (Object.prototype.toString.call(obj) === "[object Array]") {
     newObj = [];
-    obj.forEach(item => {
+    obj.forEach((item) => {
       if (typeof item == "object") {
         newObj.push(copyDeepObject(item));
       } else {
@@ -244,17 +244,17 @@ function diffArray(arr1, arr2) {
   }
   let isExist = true;
   arr1.forEach((item, index) => {
-    if(!Object.is(item, arr2[index])){
+    if (!Object.is(item, arr2[index])) {
       isExist = false;
     }
-  })
+  });
   return isExist;
 }
 
 /**
  * 格式化富文本(JSON转HTML)
  * @author liubaohuo#gmail.com
- * @param content <String> 
+ * @param content <String>
  * @return <String>
  */
 function fmtJSON2HTML(content) {
@@ -264,7 +264,7 @@ function fmtJSON2HTML(content) {
     content = JSON.parse(content);
     content = $.json2html({}, content);
   } catch (Ex) {
-    warnZYKJ('json2html转化出错：', Ex);
+    warnZYKJ("json2html转化出错：", Ex);
   }
   return content;
 }
@@ -272,7 +272,7 @@ function fmtJSON2HTML(content) {
 /**
  * 格式化富文本(HTML转JSON)
  * @author liubaohuo#gmail.com
- * @param content <String> 
+ * @param content <String>
  * @return <String>
  */
 function fmtHTML2JSON(content) {
@@ -282,7 +282,7 @@ function fmtHTML2JSON(content) {
     content = $.html2json($(content));
     content = JSON.stringify(content);
   } catch (Ex) {
-    warnZYKJ('html2json转化出错：', Ex);
+    warnZYKJ("html2json转化出错：", Ex);
   }
   return content;
 }
@@ -290,7 +290,7 @@ function fmtHTML2JSON(content) {
 /**
  * 格式化时长
  * @author liubaohuo#gmail.com
- * @param second <Number> 
+ * @param second <Number>
  * @return <String>
  */
 function fmtSecond(second) {
@@ -299,21 +299,21 @@ function fmtSecond(second) {
   let HH = Math.floor(second / 60 / 60);
   let result = [];
   if (HH) {
-    result.push(HH + '时');
+    result.push(HH + "时");
   }
   if (mm) {
-    result.push(mm + '分');
+    result.push(mm + "分");
   }
   if (ss) {
-    result.push(ss + '秒');
+    result.push(ss + "秒");
   }
-  return result.join(' ');
+  return result.join(" ");
 }
 
 /**
  * 格式化浮点串
  * @author liubaohuo#gmail.com
- * @param float_nubmer <Number> 
+ * @param float_nubmer <Number>
  * @return <String>
  */
 function fmtFloatNumber(float_nubmer) {
@@ -323,52 +323,70 @@ function fmtFloatNumber(float_nubmer) {
 /**
  * 获取深层的数据
  * @author liubaohuo
- * @param parent <Objecy/Array> 
- * @param level <String> 
- * @param defaultValue <Any> 
+ * @param parent <Objecy/Array>
+ * @param level <String>
+ * @param defaultValue <Any>
  * @return <Any>
  */
 function getDeepData(parent, level, defaultValue) {
-  if (!parent) { return undefined; }
+  if (!parent) {
+    return undefined;
+  }
   let levels = level.match(/(\w+)/gi);
   let child = null;
-  if(parent instanceof Array){
+  if (parent instanceof Array) {
     child = parent.slice(0);
-  }else{
+  } else {
     child = Object.assign({}, parent);
   }
   levels.forEach((item, index) => {
-    if(typeof(child) !== 'undefined'){
-      if(child instanceof Array){
-        child = child.slice(item-1, 1);
-      }else{
+    if (typeof child !== "undefined") {
+      if (child instanceof Array) {
+        child = child.slice(item - 1, 1);
+      } else {
         child = child[item];
       }
     }
-  })
+  });
   return child || defaultValue;
 }
 
 /**
  * 判断一个对象/数组/字符串是否为空
  * @author liubaohuo
- * @param arg <Objecy/Array/String> 
+ * @param arg <Objecy/Array/String>
  * @return isEmpty
  */
 function isEmpty2(arg) {
-  if (!arg) { return true; }
+  if (typeof arg === "undefined" || arg === null) return true;
   let isEmpty = false;
-  if(typeof(arg) === "object"){
+  if (typeof arg === "object") {
     if (arg instanceof Array) {
-      isEmpty = (arg.length === 0);
-    }else{
-      isEmpty = (Object.keys(arg).length === 0);
+      isEmpty = arg.length === 0;
+    } else {
+      isEmpty = Object.keys(arg).length === 0;
     }
-  }else{
-    isEmpty = (arg.trim().length === 0);
+  } else {
+    if (typeof arg === "string") {
+      isEmpty = arg.trim().length === 0;
+    } else {
+      isEmpty = isNaN(+arg);
+    }
   }
   return isEmpty;
 }
+
+/**
+ * 判断一个对象/数组/字符串是否不为空
+ * （由于isEmpty已被Element占用，正式启用）
+ * @author liubaohuo
+ * @param arg <Objecy/Array/String>
+ * @return true(非空) false(空)
+ */
+function nonEmpty(arg) {
+  return !isEmpty2(arg);
+}
+
 /* 数字滚动方法 */
 /* CountUp('显示数字dom','原数字','需滚动到的新数字','数字小数点后保留的位数','数字增长特效的时间,此处为2秒','其他配置项') 数字滚动方法 */
 /* options: {
@@ -614,23 +632,117 @@ function CountUp(target, startVal, endVal, decimals, duration, options) {
   }
 }
 /* 判断pc或者移动端 */
-function getEnvironment(){
-  let result = ''
-  if (/(iPhone|iPad|iPhone OS|Phone|iPod|iOS|Mac|Android)/i.test(navigator.userAgent)) {
-      //移动端
-      if(/Android/i.test(navigator.userAgent)) {
-          result = "mobile";
-      }else if(/Safari/i.test(navigator.userAgent)) {//为了解决ipad pro 和Mac 笔记本身份相同的问题；在Mac osx上不会有Safari标识；
-          result = "pc";
-      } else {
-          result = "mobile";
-      }
-  } else {
+function getEnvironment() {
+  let result = "";
+  if (
+    /(iPhone|iPad|iPhone OS|Phone|iPod|iOS|Mac|Android)/i.test(
+      navigator.userAgent
+    )
+  ) {
+    //移动端
+    if (/Android/i.test(navigator.userAgent)) {
+      result = "mobile";
+    } else if (/Safari/i.test(navigator.userAgent)) {
+      //为了解决ipad pro 和Mac 笔记本身份相同的问题；在Mac osx上不会有Safari标识；
       result = "pc";
+    } else {
+      result = "mobile";
+    }
+  } else {
+    result = "pc";
   }
-  return result
+  return result;
 }
-
+/* 埋点统计公用方法 */
+function recordCountFn(id, name) {
+  if (window._czc) {
+    _czc.push(["_trackEvent", id, name]);
+  }
+}
+/* 找到某元素在list中Index */
+function findListIndex(arr, num) {
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] == num) {
+      return i;
+    }
+  }
+}
+/* 判断是否小屏 */
+function getScreen(width = 1024, height = 768) {
+  let currentWidth = document.body.clientWidth;
+  let currentHeight = document.body.clientHeight;
+  if (currentWidth <= width && currentHeight <= height) {
+    return true;
+  } else {
+    return false;
+  }
+}
+function whatBrowser() {
+  if (!!window.ActiveXObject || "ActiveXObject" in window) {
+    return true;
+  } else {
+    return false;
+  }
+}
+/* 获取url上拼接的参数 */
+function getUrlQueryVariable(url, variable) {
+  // let index = url.lastIndexOf('?');
+  // let query = url.substring(index+1,url.length);
+  // let vars = query.split("&");
+  // for (var i = 0; i < vars.length; i++) {
+  //   var pair = vars[i].split("=");
+  //   if (pair[0] == variable) {
+  //     return pair[1];
+  //   }
+  // }
+  // return false;
+  let index = url.lastIndexOf("?");
+  let query = url.substring(index + 1, url.length);
+  let returnStr = "";
+  let vars = query.split("&");
+  for (var i = 0; i < vars.length; i++) {
+    let pair = vars[i].split("=");
+    let str = "a";
+    returnStr +=
+      `${i == 0 ? "?" : "&"}` +
+      String.fromCharCode(str.charCodeAt() + i) +
+      "=" +
+      pair[1];
+  }
+  return returnStr;
+}
+/* 图片按比例显示 */
+function setImgAuto(url, w, h, imgW, imgH) {
+  let nImg = new Image(),
+    remBoxW = w,
+    rewBoxH = h,
+    pxH = h * 12,
+    pxW = w * 12;
+  nImg.src = url;
+  let calculateImgH, calculateImgW;
+  if (imgH > pxH && imgW <= pxW) {
+    calculateImgW = `${remBoxW * (imgW / imgH)}rem`;
+    calculateImgH = `${rewBoxH}rem`;
+  } else if (imgH <= pxH && imgW > pxW) {
+    calculateImgW = `${rewBoxW}rem`;
+    calculateImgH = `${rewBoxH * (imgW / imgH)}rem`;
+  } else if (imgH > pxH && imgH > pxW) {
+    if (imgW > imgH) {
+      calculateImgW = `${rewBoxW}rem`;
+      calculateImgH = `${rewBoxH * (imgW / imgH)}rem`;
+    } else {
+      calculateImgW = `${remBoxW * (imgW / imgH)}rem`;
+      calculateImgH = `${rewBoxH}rem`;
+    }
+  } else {
+    calculateImgW = `${imgW / 12}rem`;
+    calculateImgH = `${imgH / 12}rem`;
+  }
+  return {
+    width: calculateImgW,
+    height: calculateImgH,
+  };
+}
 export default {
   debounce2,
   throttle,
@@ -650,6 +762,13 @@ export default {
   diffArray,
   getDeepData,
   isEmpty2,
+  nonEmpty,
   CountUp,
-  getEnvironment
-}
+  getEnvironment,
+  recordCountFn,
+  findListIndex,
+  getScreen,
+  whatBrowser,
+  getUrlQueryVariable,
+  setImgAuto,
+};

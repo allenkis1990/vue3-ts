@@ -5,6 +5,8 @@ const HomeIndex = () =>
     import(/* webpackChunkName: "home" */ "@src/views/home/home.vue");
 const HomePage2 = () =>
     import(/* webpackChunkName: "home" */ "@src/views/home/page2.vue");
+const HomeExam = () =>
+    import(/* webpackChunkName: "home" */ "@src/views/home/exam.vue");
 
 export default [
   {
@@ -22,6 +24,15 @@ export default [
     component: HomePage2,
     meta: {
       title: "page2",
+      keepAlive: true
+    }
+  },
+  {
+    path: "exam",
+    name: "homeExam",
+    component: HomeExam,
+    meta: {
+      title: "exam",
       keepAlive: true
     }
   }

@@ -15,9 +15,11 @@
     "crypto-js": "^3.1.9-1",
     "element-plus": "^2.0.2",
     "md5": "^2.2.1",
+    "video.js": "^7.6.0",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
-    "vuex": "^4.0.0-0"
+    "vuex": "^4.0.0-0",
+    "vuex-composition-helpers": "^2.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^5.0.1",

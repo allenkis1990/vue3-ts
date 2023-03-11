@@ -10,6 +10,19 @@ const AutoImport = require('unplugin-auto-import/dist/webpack.js')
 const Components = require('unplugin-vue-components/dist/webpack.js')
 // const elementPlugin = require('unplugin-element-plus/dist/webpack.js')
 const {ElementPlusResolver} = require('unplugin-vue-components/dist/resolvers.js')
+
+//design需要用到elementui src暂时用不到
+let elementUiPlugins = []
+if(argv.design){
+  elementUiPlugins = [
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()],
+    })
+  ]
+}
 module.exports = {
   lintOnSave: 'warning',
   //里面是真正的webpack配置
@@ -32,13 +45,7 @@ module.exports = {
       new webpack.DefinePlugin({
         isDev: true
       }),
-      // elementPlugin({})
-      AutoImport({
-        resolvers: [ElementPlusResolver()],
-      }),
-      Components({
-        resolvers: [ElementPlusResolver()],
-      })
+        ...elementUiPlugins
     ]
   },
   chainWebpack: (config) => {
